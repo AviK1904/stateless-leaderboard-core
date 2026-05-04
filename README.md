@@ -44,3 +44,42 @@ This project uses Docker to instantly spin up the database and cache infrastruct
 ```bash
 git clone [https://github.com/YOUR-USERNAME/arcade-leaderboard-api.git](https://github.com/YOUR-USERNAME/arcade-leaderboard-api.git)
 cd arcade-leaderboard-api
+```
+**2. Start the Infrastructure**
+
+Start the PostgreSQL database and Redis cache in the background:
+```bash
+docker-compose up -d
+```
+**3. Start the Spring Boot Backend**
+
+Open the project in your IDE (IntelliJ/VS Code) and run the main application file, or run:
+```bash
+./mvnw spring-boot:run
+```
+**4. Start the React Frontend**
+
+Open a new terminal window and navigate to the frontend folder:
+```bash
+cd frontend-arcade
+npm install
+npm start
+```
+
+The application will now be running securely on http://localhost:5173
+
+---
+
+## 📡 Key API Endpoints
+
+| Method | Endpoint | Description | Auth Required? |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/login` | Authenticates user and returns a signed JWT | No |
+| `GET` | `/api/players/top` | Fetches the Top 10 high scores (Optimized via Redis) | No |
+| `POST` | `/api/players` | Submits a new score to PostgreSQL and evicts stale cache | **Yes (JWT)** |
+| `DELETE` | `/api/players/{id}` | Removes a player record (Admin cleanup) | **Yes (JWT)** |
+
+### 🛠️ Example Authenticated Request
+To interact with protected endpoints, include the JWT in the Authorization header:
+```bash
+Authorization: Bearer <your_jwt_token_here>
