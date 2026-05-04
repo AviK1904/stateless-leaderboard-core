@@ -1,0 +1,29 @@
+# ========================
+# REACT FRONTEND
+# ========================
+node_modules/
+build/
+.env
+
+# ========================
+# SPRING BOOT BACKEND
+# ========================
+target/
+*.jar
+*.class
+
+# ========================
+# DOCKER & DATABASE
+# ========================
+# Do not upload the actual database hard drive!
+postgres_data/
+redis_data/
+
+# ========================
+# IDE HIDDEN FILES
+# ========================
+# Hides the personal settings from VS Code or IntelliJ
+.idea/
+.vscode/
+*.iml
+.DS_Store
