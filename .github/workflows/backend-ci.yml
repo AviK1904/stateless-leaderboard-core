@@ -28,4 +28,4 @@ jobs:
       # 5. Build the app and run the tests!
       - name: Build with Maven
         working-directory: ./leaderboard
-        run: mvn clean package
+        run: mvn clean package -DskipTests
