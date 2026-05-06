@@ -87,8 +87,10 @@ function App() {
         setIsRegistering(false); 
         setLoginPass(''); 
       } else {
-        const errorText = await response.text();
-        alert(errorText); 
+        const errorData = await response.json(); 
+        
+        // We alert the specific "message" from the JSON object
+        alert("Registration Failed: " + errorData.message);
       }
     } catch (error) {
       console.error("Registration failed:", error);

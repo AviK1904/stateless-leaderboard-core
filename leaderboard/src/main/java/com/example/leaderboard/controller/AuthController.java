@@ -1,5 +1,6 @@
 package com.example.leaderboard.controller;
 
+import com.example.leaderboard.exception.UserAlreadyExistsException;
 import com.example.leaderboard.model.AppUser;
 import com.example.leaderboard.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody AppUser newUser) {
-        // 1. Check if username is already taken
+
+        // 1. Check if username is already taken and THROW our new custom exception
         if (appUserRepository.findByUsername(newUser.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest().body("Error: Username is already taken!");
+            throw new UserAlreadyExistsException("Username '" + newUser.getUsername() + "' is already taken!");
         }
 
         // 2. Hash the password BEFORE saving!
